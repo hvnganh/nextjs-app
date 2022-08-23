@@ -1,0 +1,61 @@
+.wrapper {
+    background-color: #f5f5fa;
+}
+
+.checkout__wrapper {
+    margin: 20px 0;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout__infor {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.infor__img {
+    width: 80px;
+    height: 80px;
+}
+
+.infor__name {
+    font-size: 1.4rem;
+}
+
+.infor__price {
+    font-size: 1.4rem;
+}
+
+.infor__delete-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.infor__delete {
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.checkout__btn-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.checkout__btn {
+    width: 200px;
+    height: 40px;
+    font-size: 2rem;
+    border-radius: 5px;
+    background-color: #ff3945;
+    color: var(--white);
+    cursor: pointer;
+    &:hover {
+        background-color: rgba($color: #ff3945, $alpha: 0.9);
+    }
+}
