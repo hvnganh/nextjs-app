@@ -73,6 +73,10 @@
     }
 }
 
+.information__btn.disabled {
+    background-color: rgba($color: #ff3945, $alpha: 0.5);
+}
+
 .desc-wrapper {
     margin: 10px 0;
     width: 100%;

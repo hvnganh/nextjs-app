@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import styles from './header.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,17 +8,19 @@ import {
     faHome,
 } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
+import { DataContext } from '../../Context/DataContext';
 
 const cx = classNames.bind(styles);
 
 export const Header = () => {
     const router = useRouter();
-
     const inputRef = useRef();
-
+    const { items } = useContext(DataContext);
     const handleFocusInput = () => {
         inputRef.current.focus();
     };
+
+    //{ total, setTotal, items, setItems }
 
     return (
         <div className={cx('wrapper')}>
@@ -55,7 +57,9 @@ export const Header = () => {
                             icon={faShoppingCart}
                             className={cx('header__checkout-icon')}
                         />
-                        <span className={cx('header__checkout-count')}>0</span>
+                        <span className={cx('header__checkout-count')}>
+                            {items.length}
+                        </span>
                     </div>
                 </div>
             </div>

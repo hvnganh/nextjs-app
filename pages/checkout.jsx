@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames/bind';
 import styles from './checkout.module.scss';
 import Head from 'next/head';
@@ -7,10 +7,13 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { DataContext } from '../Context/DataContext';
 
 const cx = classNames.bind(styles);
 
 function Checkout() {
+    const { items } = useContext(DataContext);
+
     return (
         <div className={cx('wrapper')}>
             <Head>
@@ -25,35 +28,62 @@ function Checkout() {
             <div className={cx('grid', 'wide')}>
                 <div className={cx('checkout__wrapper')}>
                     <div className={cx('row')}>
-                        <div className={cx('checkout__infor')}>
-                            <div className={cx('col', 'l-2')}>
-                                <div className={cx('infor__img-wrapper')}>
-                                    <img
-                                        className={cx('infor__img')}
-                                        src="https://www.horze.eu/dw/image/v2/AATB_PRD/on/demandware.static/-/Sites-hz-master-catalog/default/dwfdf7f6a8/large/26281_B.jpg?sw=1600&q=100&filename=blue-blue"
-                                        alt="product-img"
-                                    />
+                        {items.length > 0 ? (
+                            items.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className={cx('checkout__infor')}
+                                >
+                                    <div className={cx('col', 'l-2')}>
+                                        <div
+                                            className={cx('infor__img-wrapper')}
+                                        >
+                                            <img
+                                                className={cx('infor__img')}
+                                                src={item.image}
+                                                alt="product-img"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className={cx('col', 'l-4')}>
+                                        <div
+                                            className={cx(
+                                                'infor__name-wrapper'
+                                            )}
+                                        >
+                                            <p className={cx('infor__name')}>
+                                                {item.title}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={cx('col', 'l-4')}>
+                                        <div
+                                            className={cx(
+                                                'infor__price-wrapper'
+                                            )}
+                                        >
+                                            <p className={cx('infor__price')}>
+                                                {item.price} $
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={cx('col', 'l-2')}>
+                                        <div
+                                            className={cx(
+                                                'infor__delete-wrapper'
+                                            )}
+                                        >
+                                            <FontAwesomeIcon
+                                                className={cx('infor__delete')}
+                                                icon={faTrashCan}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={cx('col', 'l-4')}>
-                                <div className={cx('infor__name-wrapper')}>
-                                    <p className={cx('infor__name')}>NAME</p>
-                                </div>
-                            </div>
-                            <div className={cx('col', 'l-4')}>
-                                <div className={cx('infor__price-wrapper')}>
-                                    <p className={cx('infor__price')}>PRICE</p>
-                                </div>
-                            </div>
-                            <div className={cx('col', 'l-2')}>
-                                <div className={cx('infor__delete-wrapper')}>
-                                    <FontAwesomeIcon
-                                        className={cx('infor__delete')}
-                                        icon={faTrashCan}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                            ))
+                        ) : (
+                            <div>No Product</div>
+                        )}
                     </div>
                     <div className={cx('row')}>
                         <div className={cx('checkout__btn-wrapper')}>

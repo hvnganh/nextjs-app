@@ -1,16 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Head from 'next/head';
 import { Header } from '../../components/Header';
 import { AdvertiseSlider } from '../../components/AdvertiseSlider';
 import { Footer } from '../../components/Footer';
 import classNames from 'classnames/bind';
 import styles from './ProductDetail.module.scss';
+import { DataContext } from '../../Context/DataContext';
 
 const cx = classNames.bind(styles);
 
 function ProductDetail({ products }) {
-    console.log(products);
+    const { setItems } = useContext(DataContext);
+    const [order, setOrder] = useState(true);
+    const handleOrder = () => {
+        const newItems = {
+            id: products.id,
+            title: products.title,
+            image: products.image,
+            price: products.price,
+        };
+        setItems((item) => [...item, newItems]);
+        setOrder(false);
+    };
 
     return (
         <div className={cx('product-detail__wrapper')}>
@@ -48,9 +60,25 @@ function ProductDetail({ products }) {
                             </p>
                         </div>
                         <div className={cx('information__btn-wrapper')}>
-                            <button className={cx('information__btn')}>
-                                Order
-                            </button>
+                            {order ? (
+                                <button
+                                    onClick={handleOrder}
+                                    className={cx('information__btn')}
+                                >
+                                    Order
+                                </button>
+                            ) : (
+                                <button
+                                    disabled
+                                    onClick={handleOrder}
+                                    className={cx(
+                                        'information__btn',
+                                        'disabled'
+                                    )}
+                                >
+                                    Ordered
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

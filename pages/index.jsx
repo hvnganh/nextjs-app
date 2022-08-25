@@ -1,6 +1,4 @@
 import Head from 'next/head';
-// import useSWR from 'swr';
-// import axios from 'axios';
 import classNames from 'classnames/bind';
 import styles from './home.module.scss';
 import { Header } from '../components/Header';
@@ -8,14 +6,16 @@ import { Footer } from '../components/Footer';
 import { AdvertiseSlider } from '../components/AdvertiseSlider';
 import { Program } from '../components/Program';
 import { ProductCart } from '../components/ProductCart';
+// import useSWR from 'swr';
+// import axios from 'axios';
 
-const cx = classNames.bind(styles);
 // const fetcher = (url) => axios.get(url).then((res) => res.data);
 // const { data, error } = useSWR(
 //     'https://fakestoreapi.com/products',
 //     fetcher
 // );
 
+const cx = classNames.bind(styles);
 export default function Home({ products }) {
     return (
         <div>
